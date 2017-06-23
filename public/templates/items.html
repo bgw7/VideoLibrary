@@ -1,0 +1,95 @@
+
+<!--<nav>
+    <div id="nav" class="navbar">
+        <ul class="nav">
+            <li class="navicon item">
+                <a style="background-color: transparent;" data-ui-sref="items" data-ui-sref-opts="{reload: true}">
+                    <button class="navicon btn "><i class="icon-tags"></i> Items for Sale</button>
+                </a>
+            </li>
+            <li class="navicon item">
+                <a style="background-color: transparent;" data-ui-sref="items.addItem">
+                    <button class="navicon btn"><i class="icon-money"></i> Sell My Stuff</button>
+                </a>
+            </li>
+            <li class="navicon item">
+                <a style="background-color: transparent;" data-ui-sref="items.logout">
+                    <button class="navicon btn"><i class="icon-road"></i> Logout</button>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>-->
+
+<div class="loader" data-ng-if="loadingItems"></div>
+<div>
+    <div class="container" style="margin-right: 3%;">
+        <div class="row">
+            <div class="col-md-5">
+                <form>
+                    <div class="input-field">
+                        <button id="scannerButton" type="button" class="icon-barcode button scan btn btn-primary"> </button>
+                    </div>
+                    <!--<div class="input-field">
+                        <button type="button" class="icon-barcode button scan btn btn-primary" data-ng-click="item.postItem(097361455044)"> </button>
+                    </div>-->
+                </form>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class=" form-control col-sm-6 zoo" placeholder="Filter by title"
+                       ng-model="nameFilter"/>
+            </div>
+            <div class="btn-group col-md-2">
+                <div class="btn-group" uib-dropdown is-open="status.isopen">
+                    <div class="dropdownoptions">
+                        <select id="single-button" type="button" class="btn sortByDropdown zoo"
+                                data-ng-model="sortColumn">
+                            <option selected disabled value="">Sort by</option>
+                            <option role="menuitem" value="title">Title Ascending</option>
+                            <option role="menuitem" value="-title">Title Descending</option>
+                            <!--<option role="menuitem" value="itemName">Item Name</option>-->
+                            <option role="menuitem" value="dateCreated">Date Ascending</option>
+                            <option role="menuitem" value="-dateCreated">Date Descending</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>        
+        </div>
+    </div>
+    <br/>
+    <hr/>
+    <ul class="grid" masonry="true">
+        <li class="masonry-brick" ng-repeat="itemy in item.itemsArray | filter:nameFilter | orderBy: sortColumn| filter: userItems">
+            <div class="img__wrap">
+                <img role="button" class="asset_image" data-ng-src="{{itemy.Image}}"
+                     alt="A masonry brick" data-ng-click="item.open(itemy)">
+                <p class="text-content">{{itemy.Title}}</p>
+                <!--<p class="price">{{ itemy.price | currency }}</p>-->
+            </div>
+            <!--MODAL WINDOW-->
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3>{{descriptionModal.itemI.Title}}</h3>
+                </div>
+                <div class="modal-body">
+                    <h5> Description: {{descriptionModal.itemI.Description}}</h5>
+                    <br/>
+                    <img data-ng-src="{{descriptionModal.itemI.Image}}" alt="image"
+                         class="img-rounded img-responsive">
+                    <br/>
+                    <br/>
+                    <br/>
+                     Category: {{descriptionModal.itemI.category}}</h5>
+                    <br/>
+                    <br/>
+                    <button type="button" data-ng-click="descriptionModal.deleteItem(descriptionModal.itemI.Id)" class="btn btn-default">Delete</button>
+                </div>
+                <div id="snackbar"><strong>Item successfully deleted</strong></div>
+            </script>
+        </li>
+    </ul>
+</div>
+<script>
+</script>
