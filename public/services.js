@@ -12,7 +12,6 @@ angular.module("VidLib").service("ItemService", function($http) {
         });
     };
 
-
     item.putBarcodeItem = function(dataObj){
         return $http.put("/scan/add", dataObj, {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},

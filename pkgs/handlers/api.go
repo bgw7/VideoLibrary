@@ -77,6 +77,7 @@ func GetBarcodeData() echo.HandlerFunc {
 		searchResult := new(barcodeResult)
 		bcode := c.FormValue("number")
 		url := "https://api.upcitemdb.com/prod/trial/lookup?upc=" + bcode
+		// fmt.Println(url)
 		getJson(url, searchResult)
 		return c.JSON(http.StatusOK, searchResult)
 	}
