@@ -10,17 +10,17 @@ import (
 	_ "github.com/lib/pq"
 )
 
-//const (
-//	dbname = "postgres"
-//)
+const (
+	dbname = "postgres"
+)
 
- const (
- 	host     = "vidlibdb.cx4vc6igkzln.us-east-1.rds.amazonaws.com"
- 	user     = "vid_lib_user"
- 	port     = "5432"
- 	password = "videolibrary24"
- 	dbname   = "vidlibdb"
- )
+//const (
+//	host     = "vidlibdb.cx4vc6igkzln.us-east-1.rds.amazonaws.com"
+//	user     = "vid_lib_user"
+//	port     = "5432"
+//	password = "videolibrary24"
+//	dbname   = "vidlibdb"
+//)
 
 func initDB(filepath string) *sql.DB {
 	db, err := sql.Open("postgres", filepath)
@@ -64,13 +64,13 @@ func main() {
 		port = "1323"
 	}
 	// db := initDB(fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
-	 db := initDB(fmt.Sprintf("dbname=%s host=%s user=%s port=%s password=%s sslmode=disable", dbname, host, user, port, password))
-	//db := initDB(fmt.Sprintf("dbname=%s sslmode=disable", dbname))
+	// db := initDB(fmt.Sprintf("dbname=%s host=%s user=%s port=%s password=%s sslmode=disable", dbname, host, user, port, password))
+	db := initDB(fmt.Sprintf("dbname=%s sslmode=disable", dbname))
 	migrate(db)
 	defer db.Close()
 	e := echo.New()
 
-	e.File("/", "public/home.html")
+	e.File("/", "public/index.html")
 
 	e.File("/styles/style.css", "public/styles/style.css")
 	e.File("/styles/items.css", "public/styles/items.css")
@@ -85,7 +85,7 @@ func main() {
 	e.File("/app.js", "public/app.js")
 	e.File("/controllers.js", "public/controllers.js")
 	e.File("/services.js", "public/services.js")
-
+	e.File("/favicon.ico", "public/favicon.ico")
 	e.File("/templates/items.html", "public/templates/items.html")
 
 	// API END POINTS

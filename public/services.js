@@ -1,8 +1,3 @@
-
-
-
-
-
 angular.module("VidLib").service("ItemService", function($http) {
 
     var transform = function(data){
@@ -32,5 +27,5 @@ angular.module("VidLib").service("ItemService", function($http) {
     item.deleteItem = function(itemID){
         return $http.delete("/barcode/" + itemID)
     };
-    
+
 });
