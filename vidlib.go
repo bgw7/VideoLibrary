@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 	"os"
 	"vidlib/pkgs/handlers"
@@ -18,6 +17,7 @@ var (
 	dbport     int
 	dbpassword string
 	dbname     string
+	db         *sql.DB
 )
 
 // const (
@@ -29,7 +29,8 @@ var (
 // )
 
 func initDB(filepath string) *sql.DB {
-	db, err := sql.Open("postgres", filepath)
+	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	// db, err := sql.Open("postgres", filepath)
 
 	// Here we check for any db errors then exit
 	if err != nil {
@@ -71,7 +72,8 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 	// db := initDB(fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
-	db := initDB(fmt.Sprintf("dbname=%s host=%s user=%s port=%d password=%s sslmode=disable", dbname, dbhost, dbuser, dbport, dbpassword))
+	db := initDB("string")
+	// db := initDB(fmt.Sprintf("dbname=%s host=%s user=%s port=%d password=%s sslmode=disable", dbname, dbhost, dbuser, dbport, dbpassword))
 	// db := initDB(fmt.Sprintf("dbname=%s sslmode=disable", dbname))
 	// migrate(db)
 	defer db.Close()
