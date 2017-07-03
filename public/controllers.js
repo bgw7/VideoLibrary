@@ -119,8 +119,8 @@ return elem;
                 .fromSource({
                     target: selector,
                     constraints: {
-                        width: 800,
-                        height: 600,
+                        width: 640,
+                        height: 480,
                         facingMode: "environment"
                     }
                 });
