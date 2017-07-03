@@ -136,7 +136,6 @@ App.init();
         };
         var promiseGetBarcode = ItemService.getBarcodeData(postBarcode);
     promiseGetBarcode.then(function (response) {
-        debugger;
         if(!response.data.code.includes("INVALID") || !response.data.items === []){
         var newBarcode = {
             Title       : response.data.items[0].title,
