@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
 	"vidlib/pkgs/handlers"
 
@@ -10,15 +11,20 @@ import (
 	_ "github.com/lib/pq"
 )
 
-const (
-	dbname = "postgres"
+var (
+	port       int
+	dbhost     string
+	dbuser     string
+	dbport     int
+	dbpassword string
+	dbname     string
 )
 
 // const (
-// 	host     = "vidlibdb.cx4vc6igkzln.us-east-1.rds.amazonaws.com"
-// 	user     = "vid_lib_user"
-// 	port     = "5432"
-// 	password = "videolibrary24"
+// 	dbhost     = "vidlibdb.cx4vc6igkzln.us-east-1.rds.amazonaws.com"
+// 	dbuser     = "vid_lib_user"
+// 	dbport     = "5432"
+// 	dbpassword = "videolibrary24"
 // 	dbname   = "vidlibdb"
 // )
 
@@ -60,12 +66,13 @@ func migrate(db *sql.DB) {
 
 func main() {
 	port := os.Getenv("PORT")
+
 	if port == "" {
-		port = "1323"
+		log.Fatal("$PORT must be set")
 	}
 	// db := initDB(fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
-	// db := initDB(fmt.Sprintf("dbname=%s host=%s user=%s port=%s password=%s sslmode=disable", dbname, host, user, port, password))
-	db := initDB(fmt.Sprintf("dbname=%s sslmode=disable", dbname))
+	db := initDB(fmt.Sprintf("dbname=%s host=%s user=%s port=%d password=%s sslmode=disable", dbname, dbhost, dbuser, dbport, dbpassword))
+	// db := initDB(fmt.Sprintf("dbname=%s sslmode=disable", dbname))
 	migrate(db)
 	defer db.Close()
 	e := echo.New()
