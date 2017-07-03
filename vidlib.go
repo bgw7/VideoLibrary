@@ -45,25 +45,25 @@ func initDB(filepath string) *sql.DB {
 	return db
 }
 
-// func migrate(db *sql.DB) {
-// 	sql := `
-//     CREATE TABLE IF NOT EXISTS barcodes(
-//         Id serial NOT NULL,
-//         Title character varying(100),
-// 		Number character varying(100) NOT NULL,
-// 		Description character varying,
-// 		Image character varying NOT NULL,
-// 		CONSTRAINT id_pkey PRIMARY KEY (id)
-//     )
-// 	WITH (OIDS=FALSE);
-//     `
+func migrate(db *sql.DB) {
+	sql := `
+    CREATE TABLE IF NOT EXISTS barcodes(
+        Id serial NOT NULL,
+        Title character varying(100),
+		Number character varying(100) NOT NULL,
+		Description character varying,
+		Image character varying NOT NULL,
+		CONSTRAINT id_pkey PRIMARY KEY (id)
+    )
+	WITH (OIDS=FALSE);
+    `
 
-// 	_, err := db.Exec(sql)
-// 	// Exit if something goes wrong with our SQL statement above
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// }
+	_, err := db.Exec(sql)
+	// Exit if something goes wrong with our SQL statement above
+	if err != nil {
+		panic(err)
+	}
+}
 
 func main() {
 	port := os.Getenv("PORT")
@@ -75,7 +75,7 @@ func main() {
 	db := initDB("string")
 	// db := initDB(fmt.Sprintf("dbname=%s host=%s user=%s port=%d password=%s sslmode=disable", dbname, dbhost, dbuser, dbport, dbpassword))
 	// db := initDB(fmt.Sprintf("dbname=%s sslmode=disable", dbname))
-	// migrate(db)
+	migrate(db)
 	defer db.Close()
 	e := echo.New()
 
