@@ -27,6 +27,30 @@ type H map[string]interface{}
 
 type barcodeResult interface{}
 
+// type barcodeResult struct {
+// 	code  string `json:"code"`
+// 	items []struct {
+// 		brand                  string
+// 		color                  string
+// 		currency               string
+// 		Description            string
+// 		dimension              string
+// 		ean                    string
+// 		elid                   string
+// 		highest_recorded_price int
+// 		images                 []string
+// 		lowest_recorded_price  int
+// 		model                  string
+// 		offers                 interface{}
+// 		size                   string
+// 		title                  string
+// 		upc                    string
+// 		weight                 string
+// 	} `json:"items"`
+// 	offset int `json:"offset"`
+// 	total  int `json:"total"`
+// }
+
 func GetBarcodes(db *sql.DB) echo.HandlerFunc {
 	return func(c echo.Context) error {
 
@@ -79,6 +103,7 @@ func GetBarcodeData() echo.HandlerFunc {
 		url := "https://api.upcitemdb.com/prod/trial/lookup?upc=" + bcode
 		// fmt.Println(url)
 		getJson(url, searchResult)
+
 		return c.JSON(http.StatusOK, searchResult)
 	}
 }
