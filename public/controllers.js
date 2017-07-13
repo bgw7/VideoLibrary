@@ -194,7 +194,11 @@ App.init();
     };
 
 });
-
+// app.controller('UserModalCtrl', ['$scope', '$modalInstance' function($scope ,modalInstance {
+//   $scope.close = function () {
+//    modalInstance.close();
+//   };
+// }]);
 
 
 angular.module("VidLib").controller("ModalInstanceCtrl", function ($cookies, itemObj, ItemService, $scope, $uibModal) {
@@ -203,7 +207,9 @@ angular.module("VidLib").controller("ModalInstanceCtrl", function ($cookies, ite
 
     descriptionModal.itemI = itemObj;
     
-
+descriptionModal.cancelModal = function(){
+    $scope.$dismiss();
+}
     descriptionModal.deleteItem = function(itemID){
         barcodeId = itemID;
         var promise = ItemService.deleteItem(barcodeId);
@@ -221,7 +227,9 @@ angular.module("VidLib").controller("ModalInstanceCtrl", function ($cookies, ite
         }, function (response) {
             //failure
             alert("Failed to delete");
-        })};  
+        })
+    $scope.$dismiss();
+};  
 });
 
 

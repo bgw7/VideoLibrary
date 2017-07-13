@@ -84,7 +84,8 @@
                      Category: {{descriptionModal.itemI.category}}</h5>
                     <br/>
                     <br/>
-                    <button type="button" data-ng-click="descriptionModal.deleteItem(descriptionModal.itemI.Id)" class="btn btn-default">Delete</button>
+                    <button type='button' class='btn btn-primary' data-ng-click="descriptionModal.cancelModal()">Close</button>            
+                    <button type="button" class='btn btn-danger' data-ng-click="descriptionModal.deleteItem(descriptionModal.itemI.Id)" class="btn btn-default">Delete</button>                    
                 </div>
                 <div id="snackbar"><strong>Item successfully deleted</strong></div>
             </script>
