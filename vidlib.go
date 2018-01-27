@@ -20,14 +20,6 @@ var (
 	db         *sql.DB
 )
 
-// const (
-// 	dbhost     = "vidlibdb.cx4vc6igkzln.us-east-1.rds.amazonaws.com"
-// 	dbuser     = "vid_lib_user"
-// 	dbport     = "5432"
-// 	dbpassword = "videolibrary24"
-// 	dbname   = "vidlibdb"
-// )
-
 func initDB(filepath string) *sql.DB {
 	db, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	// db, err := sql.Open("postgres", filepath)
